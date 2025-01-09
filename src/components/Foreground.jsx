@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Card from "./Card";
 
 function Foreground() {
@@ -34,13 +34,22 @@ function Foreground() {
     },
   ];
 
+  const [topMostCardId, setTopMostCardId] = useState(null);
+
   return (
     <div
       ref={foregroundRef}
       className="h-full w-full fixed top-0 left-0 p-7 flex gap-5 flex-wrap"
     >
       {data?.map((el, i) => (
-        <Card key={i} constraintsRef={foregroundRef} cardData={el} />
+        <Card
+          key={i}
+          id={i}
+          constraintsRef={foregroundRef}
+          cardData={el}
+          topMostCardId={topMostCardId}
+          setTopMostCardId={setTopMostCardId}
+        />
       ))}
     </div>
   );
